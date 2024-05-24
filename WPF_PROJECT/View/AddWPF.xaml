@@ -1,0 +1,79 @@
+﻿<Window x:Class="WPF_PROJECT.View.AddWPF"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_PROJECT.View"
+        mc:Ignorable="d"
+        Title="AddWPF" Height="400" Width="450">
+    <Grid>
+        <Border BorderThickness="1.5" BorderBrush="SkyBlue" Padding="10" 
+               Style="{StaticResource BorstylebrushScr}" CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"></RowDefinition>
+                    <RowDefinition Height="8*"></RowDefinition>                   
+                </Grid.RowDefinitions>
+                <Button Content="WPF Course Information" Width="350" Height="40" Margin="5 5 5 5" FontSize="30" BorderBrush="LightBlue" 
+                   FontFamily="Times new Roman" Style="{StaticResource RoundButton2}"/>
+                <Grid Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="*"></ColumnDefinition>
+                        <ColumnDefinition  Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <Border Grid.Column="1" Grid.Row="1" BorderThickness="1.5" BorderBrush="SkyBlue" Padding="10" 
+                  CornerRadius="10">
+                    <DataGrid Background="Transparent" BorderBrush="SkyBlue" VerticalGridLinesBrush="LightBlue" Grid.Row="1" x:Name="subjects"  
+                        ItemsSource="{Binding WPFsubjects}" 
+                        AutoGenerateColumns="False" HorizontalGridLinesBrush="LightBlue"  
+                         CanUserAddRows="True" >
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="Teacher Name" Binding="{Binding Teachers.FullName}"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Students">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ItemsControl ItemsSource="{Binding Students}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>                                                                                                         
+                                                <TextBlock  Text="{Binding FullName}" Margin="5,0"/>                                                                        
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Subject" Binding="{Binding SubjectName}"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Grade">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ItemsControl ItemsSource="{Binding Students}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Grade}" Margin="5,0"/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Pass">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ItemsControl ItemsSource="{Binding Students}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox IsChecked="{Binding IsGraduated}" Margin="5,0"/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>                           
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
